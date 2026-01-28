@@ -1,7 +1,15 @@
 FROM node:18-slim
-RUN npm install express
-RUN npm install redis@3
+
+# Thiết lập thư mục làm việc
+WORKDIR /app
+
+# Khởi tạo file package.json nếu chưa có và cài đặt thư viện
+RUN npm init -y && \
+    npm install express redis@3 --no-audit --prefer-offline
+
+# Copy mã nguồn vào container
 COPY files/ /files/
 COPY webui.js /
-CMD ["node", "webui.js"]
-EXPOSE 80
+
+# Lệnh chạy ứng dụng
+CMD ["node", "/webui.js"]
