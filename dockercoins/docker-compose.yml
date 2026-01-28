@@ -21,8 +21,9 @@ services:
     build: webui
     ports:
     - "8000:80"
-    volumes:
-    - "./webui/files/:/files/"
+    # Tạm thời comment hoặc xóa dòng volumes bên dưới để kiểm tra
+    # volumes:
+    # - "./webui/files/:/files/"
     container_name: webui
     networks:
       - mynet
