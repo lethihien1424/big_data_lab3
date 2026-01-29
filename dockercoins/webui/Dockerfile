@@ -1,6 +1,13 @@
 FROM node:18-slim
-WORKDIR /app
-RUN npm init -y && npm install express redis@3 --no-audit
+
+# cài yarn
+RUN apt-get update && apt-get install -y --no-install-recommends yarnpkg \
+    && rm -rf /var/lib/apt/lists/*
+
+# cài dependencies bằng yarn (né lỗi npm idealTree)
+RUN yarnpkg add express redis@3
+
 COPY files/ /files/
 COPY webui.js /
-CMD ["node", "/webui.js"]
+CMD ["node", "webui.js"]
+EXPOSE 80
